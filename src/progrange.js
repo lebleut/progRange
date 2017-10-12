@@ -6,7 +6,7 @@ function progRange(){
 
 	var $progressBar = $("<input />").attr("type","range");
 
-	var maxScrollTop = $("body").prop("scrollHeight") - document.body.clientHeight;
+	var maxScrollTop = $(document).height() - $(window).height();;
 
 	$progressBar
 		.attr("min","0" )
@@ -16,5 +16,17 @@ function progRange(){
 
 	$("body").prepend( $progressBar );
 
+
+	$(window).scroll(function (event) {
+	    var scroll = $(window).scrollTop();
+	    
+	    $progRange.val(scroll);
+	});
+
+	$( window ).resize(function(){
+		var maxScrollTop = $(document).height() - $(window).height();
+		$progRange.attr("max",maxScrollTop );
+	});
+	
 	return $progressBar;
 }
